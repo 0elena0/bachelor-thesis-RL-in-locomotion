@@ -1,0 +1,41 @@
+# ERFI study on the Berkeley Humanoid, rough terrain.
+
+name: erfi_study_bh_rough
+out: erfi_study_bh_rough        # relative to RL_EXPERIMENTS_DIR (or ./experiments)
+
+conditions: [none, dr, rfi, rao, erfi_c, erfi_50]
+seeds: [0, 1, 2]
+
+train:
+  robot: bh
+  task: rough_terrain
+  num_timesteps: 200_000_000
+  num_evals: 10
+  history_len: 7               
+  policy_layers: [512, 512]    
+  value_layers: [512, 256, 128]
+  symmetric_critic: false
+  rfi_lim: [3.032, 2.052, 2.359, 3.717, 2.863, 0.158, 3.032, 2.052, 2.359, 3.717, 2.863, 0.158]   
+  rao_lim: [3.032, 2.052, 2.359, 3.717, 2.863, 0.158, 3.032, 2.052, 2.359, 3.717, 2.863, 0.158]  
+  impl: warp
+  env_overrides:
+    erfi.critic_sees_offset: true
+    history_target_error: true
+
+eval:
+  impl: jax
+  n_episodes: 50
+  duration_s: 8.0
+  success_distance_m: 2.5
+  command: [0.5, 0.0, 0.0]
+  push_start_s: 1.0
+  push_duration_s: 3.0
+  params: [payload_kg, push_N_sagittal, push_N_lateral, friction, gravity, kp_scale]
+  level_fractions:
+    payload_kg: [0.0, 0.025, 0.05, 0.075, 0.10, 0.15, 0.20]
+    push_N_sagittal: [0.0, 0.04, 0.08, 0.12, 0.16, 0.20, 0.24, 0.32]
+    push_N_lateral: [0.0, 0.04, 0.08, 0.12, 0.16, 0.20, 0.24, 0.32]
+  levels:
+    friction: [0.3, 0.5, 0.7, 0.85, 1.0, 1.15, 1.3]   
+  low_base_fraction: 0.5
+  nominal_reset: true

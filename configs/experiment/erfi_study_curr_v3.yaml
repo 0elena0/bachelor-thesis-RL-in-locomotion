@@ -1,0 +1,39 @@
+# Terrain-curriculum ERFI study on Go1 
+
+name: erfi_study_curr_v3
+out: erfi_study_curr_v3_l2.5      # relative to RL_EXPERIMENTS_DIR (or ./experiments)
+
+conditions: [none, dr, rfi, rao, erfi_c, erfi_50]
+seeds: [0, 1, 2]
+
+train:
+  robot: go1
+  task: rough_terrain
+  num_evals: 5               
+  history_len: 7
+  policy_layers: [512, 512]
+  value_layers: [512, 256, 128]
+  symmetric_critic: false
+  rfi_lim: 2.5
+  rao_lim: 2.5
+  impl: warp
+  env_overrides:
+    history_target_error: true
+
+stages:
+  - {terrain_amplitude: 0.0,   num_timesteps: 75_000_000}
+  - {terrain_amplitude: 0.015, num_timesteps: 75_000_000}
+  - {terrain_amplitude: 0.03,  num_timesteps: 75_000_000}
+  - {terrain_amplitude: 0.05,  num_timesteps: 75_000_000}
+
+eval:
+  impl: jax
+  n_episodes: 50
+  duration_s: 8.0
+  success_distance_m: 2.5
+  command: [0.5, 0.0, 0.0]
+  push_start_s: 1.0
+  push_duration_s: 3.0
+  params: [payload_kg, push_N, friction, gravity, kp_scale]
+  levels:
+    friction: [0.3, 0.5, 0.7, 0.85, 1.0, 1.15, 1.3]

@@ -1,0 +1,38 @@
+# v3 ERFI study on Boston Dynamics Spot, rough terrain
+
+
+name: erfi_study_spot_v3_rough
+out: erfi_study_spot_v3_rough
+
+conditions: [none, dr, rfi, rao, erfi_c, erfi_50]
+seeds: [0, 1, 2]
+
+train:
+  robot: spot
+  task: rough_terrain
+  num_timesteps: 300_000_000   
+  num_evals: 15
+  history_len: 7            
+  policy_layers: [512, 512]
+  value_layers: [512, 256, 128]
+  symmetric_critic: false
+  rfi_lim: [7.165, 7.097, 20.013, 7.165, 7.097, 20.013, 7.827, 4.237, 17.184, 7.827, 4.237, 17.184]   # measured 2026-09-20: 0.5 x RMS actuator force of seed1 (none), 50 x 8 s, 3.79 m nominal; left/right mirror-averaged (fl<->fr, hl<->hr), front and hind kept distinct
+  rao_lim: [7.165, 7.097, 20.013, 7.165, 7.097, 20.013, 7.827, 4.237, 17.184, 7.827, 4.237, 17.184]   # measured 2026-09-20: 0.5 x RMS actuator force of seed1 (none), 50 x 8 s, 3.79 m nominal; left/right mirror-averaged (fl<->fr, hl<->hr), front and hind kept distinct
+  impl: warp
+  env_overrides:
+    history_target_error: true
+
+eval:
+  impl: jax
+  n_episodes: 50
+  duration_s: 8.0
+  success_distance_m: 2.5
+  command: [0.5, 0.0, 0.0]
+  push_start_s: 1.0
+  push_duration_s: 3.0
+  params: [payload_kg, push_N, friction, gravity, kp_scale]
+  level_fractions:
+    payload_kg: [0.0, 0.0785, 0.157, 0.2354, 0.3139, 0.3924, 0.4708]
+    push_N: [0.0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.32]
+  levels:
+    friction: [0.3, 0.5, 0.7, 0.85, 1.0, 1.15, 1.3]   
