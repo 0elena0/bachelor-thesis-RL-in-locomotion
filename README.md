@@ -59,7 +59,7 @@ written to `$RL_EXPERIMENTS_DIR/<output folder>`. For the thesis this was
 | Go1 | flat | `erfi_study_v3.yaml` | `erfi_study_v3_l2.5` | 300 M  |
 | Go1 | rough | `erfi_study_v3_rough.yaml` | `erfi_study_v3_rough_l2.5` | 300 M  |
 | Go1 | curriculum | `erfi_study_curr_v3.yaml` | `erfi_study_curr_v3_l2.5` | 4 × 75 M |
-| A1 | flat | `erfi_study_a1_v3.yaml` | `erfi_study_a1_v3_l2.5` | 300 M ¹ |
+| A1 | flat | `erfi_study_a1_v3.yaml` | `erfi_study_a1_v3_l2.5` | 300 M |
 | A1 | rough | `erfi_study_a1_v3_rough.yaml` | `erfi_study_a1_v3_rough_l2.5` | 300 M  |
 | A1 | curriculum | `erfi_study_curr_a1_v3.yaml` | `erfi_study_curr_a1_v3_l2.5` | 4 × 75 M |
 | Spot | flat | `erfi_study_spot_v3.yaml` | `erfi_study_spot_v3` | 300 M |
