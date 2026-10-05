@@ -1,7 +1,7 @@
 # Comparison of Methods for Robust Transfer of Reinforcement Learning Policies in Locomotion
 
 Code for the bachelor's thesis **"Comparison of Methods for Robust Transfer of
-Reinforcement Learning Policies in Locomotion"*.
+Reinforcement Learning Policies in Locomotion"**.
 
 The thesis compares methods for narrowing the sim-to-real gap: domain randomization
 and the family of methods based on random torque injection at the joints (RFI, RAO,
