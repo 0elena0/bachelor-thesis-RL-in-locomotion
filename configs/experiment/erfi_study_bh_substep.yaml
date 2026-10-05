@@ -1,5 +1,6 @@
 # Berkeley Humanoid, flat ground, RFI at the physics rate
 
+
 name: erfi_study_bh_substep
 out: erfi_study_bh_substep
 conditions:
