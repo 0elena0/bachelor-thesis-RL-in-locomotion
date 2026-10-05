@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#   v1  erfi_study          erfi_study_rough
-#   v2  erfi_study_v2       erfi_study_v2_rough
 #   v3  erfi_study_v3       erfi_study_v3_rough
 #   bh  erfi_study_bh_rough erfi_study_bh        
 
@@ -23,7 +21,7 @@ LOGS="${ROOT}/logs"
 STATUS="${ROOT}/status.txt"
 mkdir -p "${LOGS}"
 
-STUDIES="${STUDIES:-erfi_study erfi_study_rough erfi_study_v2 erfi_study_v2_rough erfi_study_v3 erfi_study_v3_rough erfi_study_bh_rough erfi_study_bh}"
+STUDIES="${STUDIES:-erfi_study_v3 erfi_study_v3_rough erfi_study_bh_rough erfi_study_bh}"
 SMOKE_FLAG=""
 if [ "${SMOKE:-0}" = "1" ]; then
     SMOKE_FLAG="--smoke"
